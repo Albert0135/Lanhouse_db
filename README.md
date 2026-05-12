@@ -1,9 +1,11 @@
 # Sistema Financeiro para eSports
 ---
 ### Alunos:
-Albert França - 2025202349
-Fabio Vinicius - 2025201173
-Brenno Elimar - 2025
+*Albert França - 2025202349*
+
+*Fabio Vinicius - 2025201173*
+
+*Brenno Elimar - 2025201730*
 
 ---
 
