@@ -1,4 +1,11 @@
 # Sistema Financeiro para eSports
+---
+### Alunos:
+Albert França - 2025202349
+Fabio Vinicius - 2025201173
+Brenno Elimar - 2025
+
+---
 
 ## Objetivo do Projeto
 O projeto foi desenvolvido com o objetivo de criar um banco de dados para gerenciar informações financeiras de organizações de eSports, permitindo o controle de jogadores, times, campeonatos, patrocinadores, contratos e pagamentos.
