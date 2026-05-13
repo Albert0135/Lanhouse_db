@@ -1,4 +1,4 @@
-# Sistema Financeiro para eSports
+# Sistema de Gerenciamento para Lan House
 ---
 ### Alunos:
 *Albert França - 2025202349*
@@ -7,10 +7,9 @@
 
 *Brenno Elimar - 2025201730*
 
----
 
 ## Objetivo do Projeto
-O projeto foi desenvolvido com o objetivo de criar um banco de dados para gerenciar informações financeiras de organizações de eSports, permitindo o controle de jogadores, times, campeonatos, patrocinadores, contratos e pagamentos.
+O projeto foi desenvolvido com o objetivo de criar um banco de dados para gerenciar uma Lan House, permitindo o controle de clientes, computadores, reservas, pagamentos e funcionários.
 
 ---
 
@@ -36,92 +35,83 @@ Armazena os usuários do sistema.
 
 ---
 
-## TIMES
-Armazena os times de eSports.
+## CLIENTES
+Armazena os clientes da Lan House.
 
 ### Atributos:
-- id_time
-- nome_time
-- jogo
-- data_criacao
-
----
-
-## JOGADORES
-Armazena os jogadores pertencentes aos times.
-
-### Atributos:
-- id_jogador
-- nickname
-- idade
-- funcao
-- id_time
-
----
-
-## CAMPEONATOS
-Armazena os campeonatos realizados.
-
-### Atributos:
-- id_campeonato
+- id_cliente
 - nome
-- premio
-- data_evento
+- cpf
+- telefone
 
 ---
 
-## PATROCINADORES
-Armazena os patrocinadores dos contratos.
+## COMPUTADORES
+Armazena os computadores disponíveis.
 
 ### Atributos:
-- id_patrocinadores
-- empresa
-- valor_investido
+- id_computador
+- numero_maquina
+- configuracao
+- status
 
 ---
 
-## CONTRATOS
-Armazena os contratos dos jogadores.
+## RESERVAS
+Armazena as reservas feitas pelos clientes.
 
 ### Atributos:
-- id_contrato
+- id_reserva
+- data_reserva
+- horario_inicio
+- horario_fim
+- id_cliente
+- id_computador
+
+---
+
+## FUNCIONARIOS
+Armazena os funcionários da Lan House.
+
+### Atributos:
+- id_funcionario
+- nome
+- cargo
 - salario
-- duracao
-- id_jogador
-- id_patrocinador
 
 ---
 
 ## PAGAMENTOS
-Armazena os pagamentos realizados aos jogadores.
+Armazena os pagamentos realizados pelos clientes.
 
 ### Atributos:
 - id_pagamento
 - valor
 - data_pagamento
-- id_jogador
+- forma_pagamento
+- id_cliente
 
 ---
 
-## PARTICIPACAO
-Tabela associativa responsável por relacionar times e campeonatos.
+## SERVICOS
+Armazena os serviços extras oferecidos pela Lan House.
 
 ### Atributos:
-- id_participacao
-- id_time
-- id_campeonato
+- id_servico
+- nome_servico
+- preco
 
 ---
 
-# Relacionamentos do Modelo Conceitual
+## Relacionamentos do Modelo Conceitual
 
 | Relacionamento | Cardinalidade |
 |---|---|
-| TIMES possui JOGADORES | 1:N |
-| JOGADORES recebe PAGAMENTOS | 1:N |
-| JOGADORES assina CONTRATOS | 1:N |
-| PATROCINADORES financia CONTRATOS | 1:N |
-| CAMPEONATOS participa TIMES | N:N |
+| CLIENTES realiza RESERVAS | 1:N |
+| COMPUTADORES recebe RESERVAS | 1:N |
+| CLIENTES realiza PAGAMENTOS | 1:N |
+| FUNCIONARIOS gerencia COMPUTADORES | 1:N |
+| CLIENTES utiliza SERVICOS | N:N |
 
 ---
 
@@ -147,13 +137,13 @@ Nele são definidos:
 Foi criado o banco:
 
 ```sql
-CREATE DATABASE financeira_db;
+CREATE DATABASE lanhouse_db;
 ```
 
 Depois foi selecionado:
 
 ```sql
-USE financeira_db;
+USE lanhouse_db;
 ```
 
 ---
@@ -162,13 +152,12 @@ USE financeira_db;
 
 Foram criadas as tabelas:
 - usuarios
-- times
-- jogadores
-- campeonatos
-- patrocinadores
-- contratos
+- clientes
+- computadores
+- reservas
+- funcionarios
 - pagamentos
-- participacao
+- servicos
 
 Cada tabela possui:
 - chave primária (`PRIMARY KEY`)
@@ -184,7 +173,7 @@ As tabelas foram conectadas utilizando `FOREIGN KEY`.
 ### Exemplo:
 
 ```sql
-FOREIGN KEY (id_time) REFERENCES times(id_time)
+FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente)
 ```
 
 Isso garante integridade entre os dados.
@@ -195,12 +184,9 @@ Isso garante integridade entre os dados.
 
 | Tabela | Chave Estrangeira | Referência |
 |---|---|---|
-| jogadores | id_time | times |
-| contratos | id_jogador | jogadores |
-| contratos | id_patrocinador | patrocinadores |
-| pagamentos | id_jogador | jogadores |
-| participacao | id_time | times |
-| participacao | id_campeonato | campeonatos |
+| reservas | id_cliente | clientes |
+| reservas | id_computador | computadores |
+| pagamentos | id_cliente | clientes |
 
 ---
 
@@ -232,5 +218,4 @@ SHOW TABLES;
 ```
 
 ---
-
-<img width="1335" height="669" alt="image" src="https://github.com/user-attachments/assets/3016c9c8-e055-4cae-9ac6-765e7ebf50fe" />
+<img width="1306" height="523" alt="image" src="https://github.com/user-attachments/assets/4b417013-7e55-4cbf-97a9-cb8aeb4d8d17" />
